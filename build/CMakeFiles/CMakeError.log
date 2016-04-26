@@ -1,0 +1,76 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5a690/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5a690.dir/build.make CMakeFiles/cmTC_5a690.dir/build
+make[1]: Entering directory '/home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5a690.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_5a690.dir/CheckSymbolExists.c.o   -c /home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_5a690
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5a690.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_5a690.dir/CheckSymbolExists.c.o  -o cmTC_5a690 -rdynamic 
+CMakeFiles/cmTC_5a690.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5a690.dir/build.make:97: recipe for target 'cmTC_5a690' failed
+make[1]: *** [cmTC_5a690] Error 1
+make[1]: Leaving directory '/home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5a690/fast' failed
+make: *** [cmTC_5a690/fast] Error 2
+
+File /home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d8e28/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d8e28.dir/build.make CMakeFiles/cmTC_d8e28.dir/build
+make[1]: Entering directory '/home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d8e28.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d8e28.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d8e28
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d8e28.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d8e28.dir/CheckFunctionExists.c.o  -o cmTC_d8e28 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d8e28.dir/build.make:97: recipe for target 'cmTC_d8e28' failed
+make[1]: *** [cmTC_d8e28] Error 1
+make[1]: Leaving directory '/home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_d8e28/fast' failed
+make: *** [cmTC_d8e28/fast] Error 2
+
+
+Determining if the function glXGetProcAddressEXT exists failed with the following output:
+Change Dir: /home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7b76e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7b76e.dir/build.make CMakeFiles/cmTC_7b76e.dir/build
+make[1]: Entering directory '/home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7b76e.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=glXGetProcAddressEXT   -o CMakeFiles/cmTC_7b76e.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7b76e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b76e.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=glXGetProcAddressEXT    CMakeFiles/cmTC_7b76e.dir/CheckFunctionExists.c.o  -o cmTC_7b76e -rdynamic /usr/lib/x86_64-linux-gnu/libGL.so 
+CMakeFiles/cmTC_7b76e.dir/CheckFunctionExists.c.o: In function `main':
+CheckFunctionExists.c:(.text+0x15): undefined reference to `glXGetProcAddressEXT'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7b76e.dir/build.make:98: recipe for target 'cmTC_7b76e' failed
+make[1]: *** [cmTC_7b76e] Error 1
+make[1]: Leaving directory '/home/matt/Dropbox/Documents/CS184/final_proj/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_7b76e/fast' failed
+make: *** [cmTC_7b76e/fast] Error 2
+
+

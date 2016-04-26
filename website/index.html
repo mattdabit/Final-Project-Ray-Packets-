@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>  
+    div.padded {  
+      padding-top: 0px;  
+      padding-right: 100px;  
+      padding-bottom: 0.25in;  
+      padding-left: 100px;  
+    }  
+  </style> 
+<title>Matthew Dabit  |  CS 184</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+</head>
+<body>
+<br />
+<h1 align="middle">Speeding up the ray tracer with ray packets</h1>
+    <h2 align="middle">Members: Matthew Dabit</h2>
+    <h2 align="middle">Summary</h2
+    <div class="padded">
+        <p>
+        	The goal of my project is to speed up the ray tracer in assignment 3. I will attempt to do this by using general ray packets to group similar rays.
+        </p>
+
+    <h2 align="middle">Background</h2>
+        <p>
+        	Describe the problem that you are trying to solve: The biggest advantage of using ray tracing over rasterization is that ray tracing The biggest disadvantage of ray tracing is it's speed and efficiency compared to raterization. The problem I will try to solve is the speed of our ray tracer. This is a challenging feat because not all rays will have the same direction and origin. So we must first find similar rays, which would be difficult if we wanted to use Whitted-style ray tracing (WRT), which adds reflection and refraction as we did in the 3rd assignment. If we were to only Ray cast with shadows (RCS) we could use a common origin to find similar rays and create our packets. But when a bundle of rays in a packet hit a material and refract/reflects, such as in WRT, the origin and direction of the rays will be dissimilar and not share a common origin. This is an important issue to computer graphics because to physically render realistic images we need to use WRT over RCS. But the computational cost of WRT is too much and not feasibly on most computers without a graphics card. This could be seen with the assignment 3/4. I personally care about this because of feeling I got when I first rendered CBSphere.dae in project 3 with 1024 ssp and 100 bounces. I was so impressed with the visuals but I was disappointed with the time it took my machine to render the image. Some resources that I have been looking into to improve our pathtracer include <a href="url">https://graphics.stanford.edu/~boulos/papers/cook_gi07.pdf </a> and <a href="url">http://graphics.ucsd.edu/~henrik/papers/coherent_path_tracing.pdf.</a> Both of these papers discuss the problem of secondary rays, rays that reflect/refract. 
+        </p>
+
+    <h2 align="middle">Resources</h2>
+        <p>
+            I will be working on ubuntu and all my code will be in C++. I plan on using the code from assignment 3 as my starting point. I will be rendering my images on the machines in Soda and the my own personal gaming pc. My pc has a radeon HD7500, its getting old but it can render images pretty fast. 
+        </p>
+
+    <h2 align="middle">Goals and Deliverables</h2>
+        <p>
+        	I feel that I must deliver ray packet tracing using RCS. This will be the first step of my project. I believe that if I am able to speed up the ray tracer for files like CBspheres__lambertian.dae then I feel that I was successful. I plan on comparing the images render by ray packets and single rays side by side. I will also measure the speed of my final project compare to previous projects. This should not be difficult because our previous implementations already measure the time it takes to render an image. I will most likely create a table for several images that I chose to render and compare the speeds of ray packets and single rays. I plan to show that the speed difference between ray packets and single rays is significant. But I also want render images by the ray packet method to be indiscernible from the single ray method's rendered images. If things go well and I complete ray packets for RCS sooner than expection I will move on to implemented ray packets WRT. This is my hopeful goal because I would like to render the CBspheres.dae at significantly lower speeds. But I know that this is not an easy task being on my own. 
+        </p>
+
+    <h2 align="middle">Schedule</h2>
+    	<p>
+        	By April 19th: Implemented an algorithm that will be able to find similar origins for RCS ray packets. Most likely a k-means clustering algorithm.  
+        </p>
+        <p>
+        	By April 27th: Changed existing implementations of ray tracing to accomadate ray packets. These methods include all direct_lighting, trace ray, raytrace_pixel and so on.
+        </p>
+        <p>
+        	By April 30th: A fully working RCS ray packet tracing system. Images are rendered. Table and speed comparisons are done. 
+
+        </p>
+        <p>
+        	By May 1st: Start working on WRT ray packets.
+        </p>
+        <p>
+        	After final presentation: Write the Final Report.
+        </p>
+
+
+</div>
+</body>
+</html>
+
+
+
+
