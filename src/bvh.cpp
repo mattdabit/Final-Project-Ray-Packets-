@@ -254,7 +254,7 @@ bool BVHAccel::intersect_raypack(RayPacket& raypack, Intersection* i, BVHNode *n
   // double t0;
   // double t1;
   // BBox bbox = node->bb;
-  bool active_ray = any_active_intersect(raypack, node);
+  bool active_ray = any_active_intersect(raypack, i, node);
   // !bbox.intersect(rays, t0, t1) 
   if (!active_ray)
   {
@@ -266,40 +266,30 @@ bool BVHAccel::intersect_raypack(RayPacket& raypack, Intersection* i, BVHNode *n
 
     for (Primitive *p : *(node->prims)) 
     {
-      for (int j = 0; j < raypack.rays.size(); ++j)
-      {
-        if (raypack.rays[j].active == true)
+      // #pragma omp parallel for
+      // {
+
+        for (int j = 0; j < raypack.rays.size(); ++j)
         {
-          total_isects++;
-          Intersection* isect = new Intersection();
-          hit = p->intersect(raypack.rays[j], isect);
-
-          if (hit && isect->t <= i->t)
+          if (raypack.rays[j].active == true)
           {
-            raypack.rays[j].max_t = isect->t;
-            i->n = isect->n;
-            i->bsdf = isect->bsdf;
-            i->primitive = isect->primitive;
-            i->t = isect->t;
-          }
-        
-          free(isect);
-        }
-      }
-        // total_isects++;
-        // Intersection* isect = new Intersection();
-        // hit = p->intersect(ray, isect);
+            total_isects++;
+            Intersection* isect = new Intersection();
+            hit = p->intersect(raypack.rays[j], isect);
 
-        // if (hit && isect->t <= i->t)
-        // {
-        //   ray.max_t = isect->t;
-        //   i->n = isect->n;
-        //   i->bsdf = isect->bsdf;
-        //   i->primitive = isect->primitive;
-        //   i->t = isect->t;
-        // }
-        
-        // free(isect);
+            if (hit && isect->t <= i->t)
+            {
+              raypack.rays[j].max_t = isect->t;
+              i->n = isect->n;
+              i->bsdf = isect->bsdf;
+              i->primitive = isect->primitive;
+              i->t = isect->t;
+            }
+            raypack.intersections[j] = i;
+            free(isect);
+          }
+        }
+      // }
     }
   }
 
@@ -317,15 +307,17 @@ bool BVHAccel::intersect_raypack(RayPacket& raypack, Intersection* i, BVHNode *n
   return !(i->primitive == NULL);
 }
 
-bool BVHAccel::any_active_intersect(RayPacket& raypack, BVHNode *node) const {
+bool BVHAccel::any_active_intersect(RayPacket& raypack, Intersection* i, BVHNode *node) const {
   
   
   // bool is_true;
-  // bool ret_val = false;
+  bool ret_val = false;
   // for (int i = 0; i < raypack.rays.size(); ++i)
   // parallel_for_each (begin(raypack.rays), end(raypack.rays), [&](Ray r)
   BBox bbox = node->bb;
-  #pragma omp parallel for:
+  std::vector<Ray> act_rays;
+  std::vector<Ray> inact_rays;
+  #pragma omp parallel for
   {
     for (int i = 0; i < raypack.rays.size(); ++i){
 
@@ -335,34 +327,51 @@ bool BVHAccel::any_active_intersect(RayPacket& raypack, BVHNode *node) const {
       if (bbox.intersect(raypack.rays[i], t0, t1))
       {
         raypack.rays[i].active = true;
+        ret_val = true;
+        act_rays.push_back(raypack.rays[i]);
       }
       else
       {
         raypack.rays[i].active = false;
+        inact_rays.push_back(raypack.rays[i]);
       }
-    // is_true = bbox.intersect(raypack.rays[i], t0, t1); 
-    // is_true = bbox.intersect(r, t0, t1); 
-    //if a ray in raypacket intersects bbox then its active else its not active
-    // if(is_true)
-    // {
-    //   raypack.active[i] = true;
-    //   ret_val = true;
-    // }
-    // else
-    // {
-    //   raypack.active[i] = false;
-    }
 
-  }
-  // return ret_val;
-  for (int i = 0; i < raypack.rays.size(); ++i)
-  {
-    if (raypack.rays[i].active == true)
-    {
-      return true;
     }
   }
-  return false;
+  //make raypack has all active rays
+  raypack.rays = act_rays;
+  raypack.intersections.resize(act_rays.size());
+  for (int i = 0; i < inact_rays.size(); ++i){
+    raypack.rays.push_back(inact_rays[i]);
+  }
+
+  //if enough inactive rays make a call to intersect raypack and the next node if possible
+  // if(inact_rays.size() >= 8)
+  // {
+  //   RayPacket inact_pack = RayPacket(inact_rays);
+  //   if (node->l)
+  //   {
+  //     intersect_raypack(inact_pack, i, node->l);
+  //   }
+    
+  //   if (node->r)
+  //   {
+  //     intersect_raypack(inact_pack, i, node->r);
+  //   }
+  // }
+  return ret_val;
+  // for (int i = 0; i < raypack.rays.size(); ++i)
+  // {
+  //   if (raypack.rays[i].active == true)
+  //   {
+  //     return true;
+  //   } 
+  //   else
+  //   {
+
+  //   }
+  // }
+  // return false;
 }
 
 

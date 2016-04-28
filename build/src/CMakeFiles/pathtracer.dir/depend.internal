@@ -59,15 +59,21 @@ src/CMakeFiles/pathtracer.dir/application.cpp.o
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o
  ../CGL/include/CGL/CGL.h
  ../CGL/include/CGL/color.h
+ ../CGL/include/CGL/matrix3x3.h
  ../CGL/include/CGL/matrix4x4.h
  ../CGL/include/CGL/misc.h
  ../CGL/include/CGL/spectrum.h
+ ../CGL/include/CGL/vector2D.h
  ../CGL/include/CGL/vector3D.h
  ../CGL/include/CGL/vector4D.h
  ../CGL/include/GL/glew.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/bbox.cpp
  /home/matt/Dropbox/Documents/CS184/final_proj/src/bbox.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/bsdf.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/intersection.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/random_util.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/ray.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/sampler.h
 src/CMakeFiles/pathtracer.dir/bsdf.cpp.o
  ../CGL/include/CGL/CGL.h
  ../CGL/include/CGL/color.h
@@ -114,13 +120,18 @@ src/CMakeFiles/pathtracer.dir/camera.cpp.o
  ../CGL/include/CGL/matrix4x4.h
  ../CGL/include/CGL/misc.h
  ../CGL/include/CGL/spectrum.h
+ ../CGL/include/CGL/vector2D.h
  ../CGL/include/CGL/vector3D.h
  ../CGL/include/CGL/vector4D.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/bsdf.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/camera.cpp
  /home/matt/Dropbox/Documents/CS184/final_proj/src/camera.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/collada/camera_info.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/collada/collada_info.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/intersection.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/random_util.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/ray.h
+ /home/matt/Dropbox/Documents/CS184/final_proj/src/sampler.h
 src/CMakeFiles/pathtracer.dir/collada/camera_info.cpp.o
  ../CGL/include/CGL/CGL.h
  ../CGL/include/CGL/matrix4x4.h
@@ -419,7 +430,6 @@ src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o
  /home/matt/Dropbox/Documents/CS184/final_proj/src/pathtracer.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/random_util.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/ray.h
- /home/matt/Dropbox/Documents/CS184/final_proj/src/raypacket.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/sampler.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/static_scene/aggregate.h
  /home/matt/Dropbox/Documents/CS184/final_proj/src/static_scene/environment_light.h

@@ -124,7 +124,7 @@ class BVHAccel : public Aggregate {
   }
 
   //check if any ray in packet intersects
-  bool any_active_intersect(RayPacket& raypack, BVHNode *node) const;
+  bool any_active_intersect(RayPacket& raypack, Intersection* i, BVHNode *node) const;
 
 
   /**

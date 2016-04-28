@@ -119,12 +119,12 @@ Ray Camera::generate_ray(double x, double y) const {
 
   Vector3D bl_corner = Vector3D(-tan(radians(hFov)*.5), -tan(radians(vFov)*.5),-1);
   Vector3D tr_corner = Vector3D(tan(radians(hFov)*.5), tan(radians(vFov)*.5),-1);
-  // std::cout<<"tr_corner: "<<tr_corner<<std::endl;
-  // std::cout<<"bl_corner: "<<bl_corner<<std::endl;
-
+  
+  // Vector3D br_corner = Vector3D(tan(radians(hFov)*.5), -tan(radians(vFov)*.5),-1);
+  // Vector3D tl_corner = Vector3D(-tan(radians(hFov)*.5), tan(radians(vFov)*.5),-1);
+  
   double new_x = ((bl_corner.x + x*(tr_corner.x - bl_corner.x)));//+ (tr_corner.x + x*(bl_corner.x - tr_corner.x)));
   double new_y = ((bl_corner.y + y*(tr_corner.y - bl_corner.y)));//+ (tr_corner.y + y*(bl_corner.y - tr_corner.y)));
-  Vector3D dif = tr_corner - bl_corner;
   // std::cout<<"new x: "<<new_x<<std::endl;
   // std::cout<<"new y: "<<new_y<<std::endl;
 

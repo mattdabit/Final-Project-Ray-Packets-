@@ -701,8 +701,6 @@ bsdf.h
 /home/matt/Dropbox/Documents/CS184/final_proj/src/bsdf.h
 ray.h
 /home/matt/Dropbox/Documents/CS184/final_proj/src/ray.h
-raypacket.h
-/home/matt/Dropbox/Documents/CS184/final_proj/src/raypacket.h
 stack
 -
 random
@@ -777,8 +775,10 @@ CGL/matrix4x4.h
 /home/matt/Dropbox/Documents/CS184/final_proj/src/CGL/matrix4x4.h
 CGL/spectrum.h
 /home/matt/Dropbox/Documents/CS184/final_proj/src/CGL/spectrum.h
-
-/home/matt/Dropbox/Documents/CS184/final_proj/src/raypacket.h
+bsdf.h
+/home/matt/Dropbox/Documents/CS184/final_proj/src/bsdf.h
+intersection.h
+/home/matt/Dropbox/Documents/CS184/final_proj/src/intersection.h
 
 /home/matt/Dropbox/Documents/CS184/final_proj/src/sampler.cpp
 sampler.h

@@ -58,15 +58,21 @@ src/CMakeFiles/pathtracer.dir/application.cpp.o: ../src/work_queue.h
 
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/CGL.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/color.h
+src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/matrix3x3.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/matrix4x4.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/misc.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/spectrum.h
+src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/vector2D.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/vector3D.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/CGL/vector4D.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../CGL/include/GL/glew.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../src/bbox.cpp
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../src/bbox.h
+src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../src/bsdf.h
+src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../src/intersection.h
+src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../src/random_util.h
 src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../src/ray.h
+src/CMakeFiles/pathtracer.dir/bbox.cpp.o: ../src/sampler.h
 
 src/CMakeFiles/pathtracer.dir/bsdf.cpp.o: ../CGL/include/CGL/CGL.h
 src/CMakeFiles/pathtracer.dir/bsdf.cpp.o: ../CGL/include/CGL/color.h
@@ -113,13 +119,18 @@ src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../CGL/include/CGL/matrix3x3.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../CGL/include/CGL/matrix4x4.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../CGL/include/CGL/misc.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../CGL/include/CGL/spectrum.h
+src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../CGL/include/CGL/vector2D.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../CGL/include/CGL/vector3D.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../CGL/include/CGL/vector4D.h
+src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/bsdf.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/camera.cpp
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/camera.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/collada/camera_info.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/collada/collada_info.h
+src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/intersection.h
+src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/random_util.h
 src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/ray.h
+src/CMakeFiles/pathtracer.dir/camera.cpp.o: ../src/sampler.h
 
 src/CMakeFiles/pathtracer.dir/collada/camera_info.cpp.o: ../CGL/include/CGL/CGL.h
 src/CMakeFiles/pathtracer.dir/collada/camera_info.cpp.o: ../CGL/include/CGL/matrix4x4.h
@@ -418,7 +429,6 @@ src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/pathtracer.cpp
 src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/pathtracer.h
 src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/random_util.h
 src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/ray.h
-src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/raypacket.h
 src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/sampler.h
 src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/static_scene/aggregate.h
 src/CMakeFiles/pathtracer.dir/pathtracer.cpp.o: ../src/static_scene/environment_light.h

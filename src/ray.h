@@ -1,11 +1,15 @@
 #ifndef CGL_RAY_H
 #define CGL_RAY_H
 
+
 #include "CGL/CGL.h"
 #include "CGL/vector3D.h"
 #include "CGL/vector4D.h"
 #include "CGL/matrix4x4.h"
 #include "CGL/spectrum.h"
+#include "bsdf.h"
+#include "intersection.h"
+
 
 #define PART 5
 #define PART_1 (PART >= 1)
@@ -92,11 +96,13 @@ struct LoggedRay {
 
 struct RayPacket {
   std::vector<Ray> rays;
-  // std::vector<bool> active;
+  // bool check;
+  std::vector<CGL::StaticScene::Intersection *> intersections;
 // std::vector<bool> as
   RayPacket(std::vector<Ray> rs)
     {
       rays = rs;
+      // check = c;
       // active = as;
     }
 };

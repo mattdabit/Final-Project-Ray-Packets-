@@ -1,7 +1,6 @@
 #include "pathtracer.h"
 #include "bsdf.h"
 #include "ray.h"
-#include "raypacket.h"
 
 
 #include <stack>
@@ -596,24 +595,36 @@ Spectrum PathTracer::trace_raypack(RayPacket &r, bool includeLe) {
   // or if the previous ray came from the camera.
 
   if (includeLe)
-    L_out += isect.bsdf->get_emission();
-
-  // You will implement this in part 3. 
-  // Delta BSDFs have no direct lighting since they are zero with probability 1 --
-  // their values get accumulated through indirect lighting, where the BSDF 
-  // gets to sample itself.
-  if (!isect.bsdf->is_delta()){
+  {
     #pragma omp parallel for
     {
       for (int i = 0; i < r.rays.size(); ++i)
       {
         if (r.rays[i].active == true)
         {
-          L_out += estimate_direct_lighting(r.rays[i], isect);
+          L_out += r.intersections[i]->bsdf->get_emission();
         }
       }
     }
   }
+    // L_out += isect.bsdf->get_emission();
+
+  // You will implement this in part 3. 
+  // Delta BSDFs have no direct lighting since they are zero with probability 1 --
+  // their values get accumulated through indirect lighting, where the BSDF 
+  // gets to sample itself.
+  
+  #pragma omp parallel for
+  {
+    for (int i = 0; i < r.rays.size(); ++i)
+    {
+      if (r.rays[i].active == true && (!r.intersections[i]->bsdf->is_delta()))
+      {
+        L_out += estimate_direct_lighting(r.rays[i], *r.intersections[i]);
+      }
+    }
+  }
+
 
   // You will implement this in part 4.
   // If the ray's depth is zero, then the path must terminate
@@ -624,13 +635,13 @@ Spectrum PathTracer::trace_raypack(RayPacket &r, bool includeLe) {
     {
       if (r.rays[i].active == true && r.rays[i].depth > 0)
       {
-        L_out += estimate_indirect_lighting(r.rays[i], isect);
+        L_out += estimate_indirect_lighting(r.rays[i], *r.intersections[i]);
       }
     }
   }
     // if (r.depth > 0)
     //   L_out += estimate_indirect_lighting(r, isect);
-
+  // return L_out/active_count;
   return L_out;
 
 }
@@ -641,10 +652,11 @@ Spectrum PathTracer::raytrace_pixel(size_t x, size_t y) {
   // Make a loop that generates num_samples camera rays and traces them 
   // through the scene. Return the average Spectrum.
   int num_samples = ns_aa; // total samples to evaluate
-  Vector2D origin = Vector2D(x,y); // bottom left corner of the pixel
+  // Vector2D origin = Vector2D(x,y); // bottom left corner of the pixel
 
   double w = sampleBuffer.w;
   double h = sampleBuffer.h;
+  Spectrum color = Spectrum();
   if (num_samples == 1)
   {
     Ray ray = camera->generate_ray((x + 0.5)/w, (y + 0.5)/h);
@@ -653,10 +665,10 @@ Spectrum PathTracer::raytrace_pixel(size_t x, size_t y) {
     return trace_ray(ray, true);
   }
 
-  // Spectrum color = Spectrum(); 
   //adding ray Packet stuff
-  std::vector<Ray> rays;
-  std::vector<bool> active;
+  std::vector<Ray> rs;
+  // double min_samples = sqrt(num_samples);
+  RayPacket raypack = RayPacket(rs);
   for (int i = 0; i < num_samples; i++)
   { 
     Vector2D sample = gridSampler->get_sample();
@@ -664,21 +676,48 @@ Spectrum PathTracer::raytrace_pixel(size_t x, size_t y) {
     ray.depth = max_ray_depth;
 
     ray.active = true;
-    rays.push_back(ray);
+    rs.push_back(ray);
     // active.push_back(true);
+    // if (i % 16 == 0 && num_samples >= 16)
+    // {
+    //   RayPacket raypack = RayPacket(rays);
+    //   // raypack.check = true;
+    //   color += trace_raypack(raypack, true);
+    // }
+    // (num_samples/2) good spped and quality trade
+    if (i %  (num_samples/2) == 0)
+    {
+      raypack.rays = rs;
+      // raypack.check = true;
+      color += trace_raypack(raypack, true);
 
+    }
     // color += trace_ray(ray, true);
   }
-  RayPacket raypack = RayPacket(rays);
-
+  
+  double cnt = 0;
+  for (int i = 0; i < raypack.rays.size(); ++i)
+  {
+    if (raypack.rays[i].active == true)
+    {
+      cnt++;
+    }
+  }
   // for (int i = 0; i < raypack.rays.size(); ++i)
   // {
     // cout<<"ray origin "<< i<< " : "<<raypack.rays[i].o << " ray direction: "<<raypack.rays[i].d<<endl;
     // cout<<"ray active "<< i<< " : "<<raypack.active[i] << endl;
   // }
-  Spectrum color = trace_raypack(raypack, true);
   //Trace stuff need TODO
-  color /= num_samples;
+  // color /= num_samples;
+  if (cnt != 0){
+    color /= cnt;
+  }
+  
+
+  // float ill = color.illum() * 10.0;
+  // cout<<"color: "<<color<<" illum: "<< ill<< endl;
+  
   return color;
 }
 
